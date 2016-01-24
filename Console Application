@@ -1,0 +1,108 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading; 
+
+namespace test_app_one
+{
+    
+
+        //entry point for program
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Preserve current console color 
+            ConsoleColor oldColor = Console.ForegroundColor;
+
+            TellPeopleWhatProgramThisIs();
+
+            //create a random object 
+            Random randomObject = new Random();
+
+            // loop forever 
+            while (true)
+            {
+                string questionString = GetQuestionFromUser();
+
+                //make comptuer puase 
+                int numberOfSecondsToSleep = randomObject.Next(5) + 1;
+                Console.WriteLine("thinking about your question..one sec"); 
+                Thread.Sleep(numberOfSecondsToSleep *1000);
+
+
+                if(questionString.Length == 0)
+                {
+                    Console.WriteLine("you need to type a question");
+                    continue;
+
+                }
+
+                //see if the user typed quit
+                if (questionString.ToLower() == "quit")
+                {
+                    break;
+                }
+
+                if (questionString.ToLower() == "you suck")
+                {
+                    Console.WriteLine("bye");
+                    break;
+                }
+
+                //Get a random number
+                int randomNumber = randomObject.Next(3);       
+
+                //use random number to produce response 
+                switch(randomNumber)
+                {
+                    case 0:
+                        {
+                            Console.WriteLine("Yes");
+                            break; 
+                        }
+                    case 1: 
+                        {
+                            Console.WriteLine("No");
+                            break;
+                        }
+                    case 2: 
+                        {
+                            Console.WriteLine("No");
+                            break;
+                        }
+                }
+
+            }
+
+
+            //Cleaning up
+            Console.ForegroundColor = oldColor;
+        }
+
+        //This will print the name of the program
+        static void TellPeopleWhatProgramThisIs()
+        {
+            //Change console text color
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.Write("M");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Magic 8 Ball");
+        }
+
+        static string GetQuestionFromUser()
+        {
+            //will ask user for a quesiton
+            //and store the quesiton text in questionSTring variable
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write("Ask a question?: ");
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            string questionString = Console.ReadLine();
+
+            return questionString; 
+        }
+  
+    }
+}
